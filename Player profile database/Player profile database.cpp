@@ -3,10 +3,66 @@
 
 #include "pch.h"
 #include <iostream>
+#include <fstream>
+#include <string>
 
+
+bool running = true; //keeps the program from closing untill user says to close
+using namespace std;
+int input = 0;
+std::string playername;
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	//std::ofstream out;
+	//out.open("database.dat", ofstream::out | ofstream::binary);
+	//out.write("name", 30);
+
+
+	std::cout << "Player Database app" << endl;
+
+	while (running)
+	{
+		system("cls");
+		std::cout << "Player Database app" << endl;
+
+		std::cout << "please choose an option by typing the number" << endl;
+		//std::cout << "this program will save all progress when closed using the menu do not hit x on the program or you will lose all your progr";
+
+		cout << "1. Add Player" << endl;
+		cout << "2. Remove player" << endl;
+		cout << "3. Edit Player" << endl;
+		cout << "4. load" << endl;
+		cout << "5. save" << endl;
+		cout << "6. quit" << endl;
+
+		cin >> input;
+
+		switch (input)
+		{
+		case 1:
+			cin >> playername;
+				break;
+		case 2:
+		case 3:
+		case 4:
+
+		case 5:
+			//std::ofstream out;
+			//out.open("database.dat", ofstream::out | ofstream::binary);
+			//out.write(playername, 30);
+			//out.write()
+		case 6:
+			running = false;
+		}
+
+
+
+
+	}
+
+
+
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
