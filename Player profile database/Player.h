@@ -1,12 +1,15 @@
 #pragma once
-#include <string>
 class Player
 {
 public:
 	Player();
+	Player(char name, int score);
 	~Player();
-	std::string name;
-	int score;
+	int Score;
+	char Name;
+
+	char GetName();
 
 };
+
 

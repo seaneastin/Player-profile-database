@@ -5,17 +5,38 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "player.h"
 
 
+
+Player players[5];
 bool running = true; //keeps the program from closing untill user says to close
 using namespace std;
 int input = 0;
-std::string playername;
-int main()
+char tempname;
+
+
+void save()
 {
 	//std::ofstream out;
 	//out.open("database.dat", ofstream::out | ofstream::binary);
-	//out.write("name", 30);
+	//out.write(players[0].GetName, 30);
+	//out.close();
+
+
+}
+
+
+void addplayer()
+{
+	cin >> tempname;
+	Player Sean(tempname, 30);
+}
+
+
+
+int main()
+{
 
 
 	std::cout << "Player Database app" << endl;
@@ -34,23 +55,26 @@ int main()
 		cout << "4. load" << endl;
 		cout << "5. save" << endl;
 		cout << "6. quit" << endl;
+		cout << "7: output player info test" << endl;
 
 		cin >> input;
 
 		switch (input)
 		{
 		case 1:
-			cin >> playername;
-				break;
+			addplayer();
 		case 2:
+
+
 		case 3:
+
+
 		case 4:
 
+
 		case 5:
-			//std::ofstream out;
-			//out.open("database.dat", ofstream::out | ofstream::binary);
-			//out.write(playername, 30);
-			//out.write()
+			save();
+			break;
 		case 6:
 			running = false;
 		}

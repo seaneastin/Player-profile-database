@@ -2,11 +2,18 @@
 #include "Player.h"
 
 
-Player::Player()
+Player::Player(char name, int score)
 {
+
 }
 
 
 Player::~Player()
 {
+
+}
+
+char Player::GetName()
+{
+	return Name;
 }
