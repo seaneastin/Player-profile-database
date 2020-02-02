@@ -3,13 +3,19 @@ class Player
 {
 public:
 	Player();
-	Player(char name, int score);
+	Player(char name[30], int score);
 	~Player();
-	int Score;
-	char Name;
 
-	char GetName();
 
+
+	void SetName(char newname[30]);
+	char* GetName();
+	void SetScore(int score);
+	int  getScore();
+
+private:
+	int m_score;
+	char m_name[30];
 };
 
 

@@ -9,28 +9,67 @@
 
 
 
-Player players[5];
+Player* players;
 bool running = true; //keeps the program from closing untill user says to close
 using namespace std;
 int input = 0;
-char tempname;
+char tempname[30];
+int tempscore;
+int playeramount = 0;
 
 
 void save()
 {
-	//std::ofstream out;
-	//out.open("database.dat", ofstream::out | ofstream::binary);
-	//out.write(players[0].GetName, 30);
-	//out.close();
+	std::ofstream out;
+	out.open("database.dat", ofstream::out | ofstream::binary);
+	for (int i = 0; i < playeramount; i++)
+	{
+		out.write(players[0].GetName(), 30);
+	}
+
+	out.close();
 
 
 }
 
 
-void addplayer()
+void removeplayer(int index)
 {
-	cin >> tempname;
-	Player Sean(tempname, 30);
+	Player* tempPlayers = new Player[playeramount - 1];
+	int newPosition = 0;
+	for (int i = 0; i < playeramount; i++)
+	{
+		if (i != index)
+		{
+			tempPlayers[newPosition] = tempPlayers[i];
+			newPosition++;
+		}
+	}
+
+	players = tempPlayers;
+}
+
+void addplayer(char name[30], int score)
+{
+	Player* tempPlayers = new Player[playeramount + 1];
+	for (int i = 0; i < playeramount; i++)
+	{
+		tempPlayers[i] = players[i];
+	}
+
+	tempPlayers[playeramount].SetName(name);
+	tempPlayers[playeramount].SetScore(score);
+	playeramount++;
+
+	players = new Player[playeramount];
+
+
+	for (int i = 0; i < playeramount; i++)
+	{
+		players[i] = tempPlayers[i];
+	}
+
+	delete[] tempPlayers;
 }
 
 
@@ -43,6 +82,8 @@ int main()
 
 	while (running)
 	{
+		cin.clear();
+		cin.ignore(cin.rdbuf()->in_avail());
 		system("cls");
 		std::cout << "Player Database app" << endl;
 
@@ -62,22 +103,52 @@ int main()
 		switch (input)
 		{
 		case 1:
-			addplayer();
+			cin >> tempname;
+			cin >> tempscore;
+			addplayer(tempname, tempscore);
+			break;
 		case 2:
+			cout << "which player would you like to remove" << endl;
+			for (int i = 0; i < playeramount; i++)
+			{
+				cout << i << ": " << players[i].GetName() << endl;
+			}
+			cin >> input;
+			if (input > playeramount)
+			{
+				cout << "this is not a valid input" << endl;
+				system("pause");
+			}
+			else
+			{
 
-
+				removeplayer(input);
+			}
+	
+			break;
 		case 3:
-
-
+			break;
 		case 4:
-
-
+			break;
 		case 5:
 			save();
 			break;
 		case 6:
 			running = false;
+			break;
+		case 7:
+			for (int i = 0; i < playeramount; i++)
+			{
+				cout << players[i].GetName() << " " << players[i].getScore() << endl;
+
+			}
+
+			system("pause");
+			break;
 		}
+
+
+
 
 
 

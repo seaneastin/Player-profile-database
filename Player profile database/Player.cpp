@@ -1,10 +1,17 @@
 #include "pch.h"
 #include "Player.h"
+#include <cstring>
 
 
-Player::Player(char name, int score)
+Player::Player()
 {
 
+}
+
+Player::Player(char name[30], int score)
+{
+
+	strcpy_s(m_name, name);
 }
 
 
@@ -13,7 +20,23 @@ Player::~Player()
 
 }
 
-char Player::GetName()
+void Player::SetName(char newname[30])
 {
-	return Name;
+	strcpy_s(m_name,newname);
 }
+
+char* Player::GetName()
+{
+	return m_name;
+}
+
+void Player::SetScore(int score)
+{
+	m_score = score;
+}
+
+int Player::getScore()
+{
+	return m_score;
+}
+
