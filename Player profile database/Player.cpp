@@ -12,6 +12,7 @@ Player::Player(char name[30], int score)
 {
 
 	strcpy_s(m_name, name);
+	m_score = score;
 }
 
 

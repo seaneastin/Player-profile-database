@@ -10,12 +10,30 @@
 
 
 Player* players;
-bool running = true; //keeps the program from closing untill user says to close
+bool running = true; //keeps the program from closing until user says to close
 using namespace std;
 int input = 0;
 char tempname[30];
 int tempscore;
 int playeramount = 0;
+
+void sort() //bubblesort
+{
+	bool sorted = false;
+	while (!sorted)
+	{
+		for (int i = 0; i < playeramount; i++)
+		{
+
+		}
+	}
+}
+
+
+void load()
+{
+
+}
 
 
 void save()
@@ -41,12 +59,18 @@ void removeplayer(int index)
 	{
 		if (i != index)
 		{
-			tempPlayers[newPosition] = tempPlayers[i];
+			tempPlayers[newPosition] = players[i];
 			newPosition++;
 		}
 	}
-
-	players = tempPlayers;
+	playeramount--;
+	delete[] players;
+	players = new Player[playeramount];
+	for (int i = 0; i < playeramount; i++)
+	{
+		players[i] = tempPlayers[i];
+	}
+	delete[] tempPlayers;
 }
 
 void addplayer(char name[30], int score)
@@ -61,6 +85,9 @@ void addplayer(char name[30], int score)
 	tempPlayers[playeramount].SetScore(score);
 	playeramount++;
 
+	
+
+	delete[] players;
 	players = new Player[playeramount];
 
 
@@ -103,17 +130,31 @@ int main()
 		switch (input)
 		{
 		case 1:
+			cout << "type the players name" << endl;
+			
 			cin >> tempname;
+			cout << "type the players score" << endl;
 			cin >> tempscore;
 			addplayer(tempname, tempscore);
+			cout << "success. added a new player" << endl;
+			system("pause");
 			break;
 		case 2:
+			if (playeramount == 0)
+			{
+				cout << "there are no players created" << endl;
+				system("pause");
+				break;
+			}
 			cout << "which player would you like to remove" << endl;
 			for (int i = 0; i < playeramount; i++)
 			{
 				cout << i << ": " << players[i].GetName() << endl;
 			}
 			cin >> input;
+
+
+
 			if (input > playeramount)
 			{
 				cout << "this is not a valid input" << endl;
@@ -124,9 +165,18 @@ int main()
 
 				removeplayer(input);
 			}
+			cout << "success. removed a player" << endl;
+			system("pause");
+
 	
 			break;
 		case 3:
+			if (playeramount == 0)
+			{
+				cout << "there are no players created" << endl;
+				system("pause");
+				break;
+			}
 			break;
 		case 4:
 			break;
@@ -137,9 +187,15 @@ int main()
 			running = false;
 			break;
 		case 7:
+			if (playeramount == 0)
+			{
+				cout << "there are no players created" << endl;
+				system("pause");
+				break;
+			}
 			for (int i = 0; i < playeramount; i++)
 			{
-				cout << players[i].GetName() << " " << players[i].getScore() << endl;
+				cout << i << ": " << players[i].GetName() << " " << players[i].getScore() << endl;
 
 			}
 
