@@ -16,14 +16,30 @@ int input = 0;
 char tempname[30];
 int tempscore;
 int playeramount = 0;
-
 void sort() //bubblesort
 {
+	Player temp;
 	bool sorted = false;
 	while (!sorted)
 	{
-		for (int i = 0; i < playeramount; i++)
+		sorted = true;
+		for (int i = 0; i < playeramount - 1; i++)
 		{
+			if (strcmp(players[i].GetName(), players[i + 1].GetName()) > 0)
+			{
+				temp = players[i];
+				players[i] = players[i + 1];
+				players[i + 1] = temp;
+				sorted = false;
+
+				for (int i = 0; i < playeramount; i++)
+				{
+					cout << i << ": " << players[i].GetName() << " " << players[i].getScore() << endl;
+
+				}
+
+				system("pause");
+			}
 
 		}
 	}
@@ -95,8 +111,13 @@ void addplayer(char name[30], int score)
 	{
 		players[i] = tempPlayers[i];
 	}
-
+	
 	delete[] tempPlayers;
+
+	
+	
+	sort();
+
 }
 
 
