@@ -112,21 +112,65 @@ bool binarysearch(char name[30])
 
 
 
+void addplayer(char name[30], int score)
+{
+	Player* tempPlayers = new Player[playeramount + 1];
+	for (int i = 0; i < playeramount; i++)
+	{
+		tempPlayers[i] = players[i];
+	}
 
+	tempPlayers[playeramount].SetName(name);
+	tempPlayers[playeramount].SetScore(score);
+	playeramount++;
+
+
+
+	delete[] players;
+	players = new Player[playeramount];
+
+
+	for (int i = 0; i < playeramount; i++)
+	{
+		players[i] = tempPlayers[i];
+	}
+
+	delete[] tempPlayers;
+
+
+
+	sort();
+
+}
 
 void load()
 {
+	std::ifstream file;
+	file.open("database.dat", std::ios_base::in | ios_base::binary);
+	if (file.is_open())
+	{
+		while (!file.eof() && file.peek() != EOF)
+		{
+			file.read(tempname, 30);
+			file.read((char*)&tempscore, sizeof(int));
+			addplayer(tempname, tempscore);
+		}
+	}
+
 
 }
 
 
 void save()
 {
+	int score = 0;
 	std::ofstream out;
-	out.open("database.dat", ofstream::out | ofstream::binary);
+	out.open("database.dat", ios_base::out | ios_base::binary);
 	for (int i = 0; i < playeramount; i++)
 	{
-		out.write(players[0].GetName(), 30);
+		score = players[i].getScore();
+		out.write(players[i].GetName(), 30);
+		out.write((char*)&score, sizeof(int));
 	}
 
 	out.close();
@@ -157,36 +201,7 @@ void removeplayer(int index)
 	delete[] tempPlayers;
 }
 
-void addplayer(char name[30], int score)
-{
-	Player* tempPlayers = new Player[playeramount + 1];
-	for (int i = 0; i < playeramount; i++)
-	{
-		tempPlayers[i] = players[i];
-	}
 
-	tempPlayers[playeramount].SetName(name);
-	tempPlayers[playeramount].SetScore(score);
-	playeramount++;
-
-	
-
-	delete[] players;
-	players = new Player[playeramount];
-
-
-	for (int i = 0; i < playeramount; i++)
-	{
-		players[i] = tempPlayers[i];
-	}
-	
-	delete[] tempPlayers;
-
-	
-	
-	sort();
-
-}
 
 
 
@@ -293,6 +308,7 @@ int main()
 			}
 			break;
 		case 4:
+			load();
 			break;
 		case 5:
 			save();
