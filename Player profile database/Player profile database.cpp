@@ -16,6 +16,8 @@ int input = 0;
 char tempname[30];
 int tempscore;
 int playeramount = 0;
+int binarysearchoutput = 0;
+
 void sort() //bubblesort
 {
 	Player temp;
@@ -44,6 +46,72 @@ void sort() //bubblesort
 		}
 	}
 }
+
+
+void editplayer()
+{
+	cin.clear();
+	cin.ignore(cin.rdbuf()->in_avail());
+	cout << "what would you like to edit" << endl;
+	cout << "Name: " << players[binarysearchoutput].GetName() << endl;
+	cout << "Score: " << players[binarysearchoutput].getScore() << endl;
+	cout << "1. change name" << endl;
+	cout << "2. change score" << endl;
+	cout << "3. go back" << endl;
+	cin >> input;
+	cin.clear();
+	cin.ignore(cin.rdbuf()->in_avail());
+	switch (input)
+	{
+	case 1:
+		cout << "enter a new name" << endl;
+		cin >> tempname;
+		players[binarysearchoutput].SetName(tempname);
+		sort();
+		break;
+	case 2:
+		cout << "enter a new score" << endl;
+		cin >> input;
+		players[binarysearchoutput].SetScore(input);
+		break;
+	case 3:
+		break;
+
+	}
+}
+
+
+bool binarysearch(char name[30])
+{
+	int Left = 0;
+	int Right = playeramount - 1;
+	int Middle = 0;
+	while (Left <= Right)
+	{
+		Middle = (Left + Right) / 2;
+		if (strcmp(players[Middle].GetName() , name) == 0)
+		{
+			binarysearchoutput = Middle;
+			return true;
+		}
+
+		if (strcmp(players[Middle].GetName() , name) < 0 )
+		{
+			Left = Middle + 1;
+		}
+
+		if (strcmp(players[Middle].GetName() , name) > 0)
+		{
+			Right = Middle - 1;
+		}
+
+	}
+
+	return false;
+}
+
+
+
 
 
 void load()
@@ -154,10 +222,21 @@ int main()
 			cout << "type the players name" << endl;
 			
 			cin >> tempname;
-			cout << "type the players score" << endl;
-			cin >> tempscore;
-			addplayer(tempname, tempscore);
-			cout << "success. added a new player" << endl;
+			if (!binarysearch(tempname))
+			{
+				cout << "type the players score" << endl;
+				cin >> tempscore;
+				addplayer(tempname, tempscore);
+				cout << "success. added a new player" << endl;
+			}
+			else
+			{
+				cout << "there is already someone with that name" << endl;
+			}
+
+
+
+
 			system("pause");
 			break;
 		case 2:
@@ -197,6 +276,20 @@ int main()
 				cout << "there are no players created" << endl;
 				system("pause");
 				break;
+			}
+			else
+			{
+				cout << "please type in the name of the player you would like to edit" << endl;
+				cin >> tempname;
+				if (binarysearch(tempname))
+				{
+					editplayer();
+				}
+				else
+				{
+					cout << "could not find the person specified" << endl;
+				}
+				system("pause");
 			}
 			break;
 		case 4:
