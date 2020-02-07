@@ -33,20 +33,41 @@ void sort() //bubblesort
 				players[i] = players[i + 1];
 				players[i + 1] = temp;
 				sorted = false;
-
-				for (int i = 0; i < playeramount; i++)
-				{
-					cout << i << ": " << players[i].GetName() << " " << players[i].getScore() << endl;
-
-				}
-
-				system("pause");
 			}
 
 		}
 	}
 }
 
+
+bool binarysearch(char name[30])
+{
+	int Left = 0;
+	int Right = playeramount - 1;
+	int Middle = 0;
+	while (Left <= Right)
+	{
+		Middle = (Left + Right) / 2;
+		if (strcmp(players[Middle].GetName(), name) == 0)
+		{
+			binarysearchoutput = Middle;
+			return true;
+		}
+
+		if (strcmp(players[Middle].GetName(), name) < 0)
+		{
+			Left = Middle + 1;
+		}
+
+		if (strcmp(players[Middle].GetName(), name) > 0)
+		{
+			Right = Middle - 1;
+		}
+
+	}
+
+	return false;
+}
 
 void editplayer()
 {
@@ -66,8 +87,16 @@ void editplayer()
 	case 1:
 		cout << "enter a new name" << endl;
 		cin >> tempname;
-		players[binarysearchoutput].SetName(tempname);
-		sort();
+		if (!binarysearch(tempname))
+		{
+			players[binarysearchoutput].SetName(tempname);
+			sort();
+		}
+		else
+		{
+			cout << "there is already someone with that name" << endl;
+		}
+
 		break;
 	case 2:
 		cout << "enter a new score" << endl;
@@ -81,34 +110,7 @@ void editplayer()
 }
 
 
-bool binarysearch(char name[30])
-{
-	int Left = 0;
-	int Right = playeramount - 1;
-	int Middle = 0;
-	while (Left <= Right)
-	{
-		Middle = (Left + Right) / 2;
-		if (strcmp(players[Middle].GetName() , name) == 0)
-		{
-			binarysearchoutput = Middle;
-			return true;
-		}
 
-		if (strcmp(players[Middle].GetName() , name) < 0 )
-		{
-			Left = Middle + 1;
-		}
-
-		if (strcmp(players[Middle].GetName() , name) > 0)
-		{
-			Right = Middle - 1;
-		}
-
-	}
-
-	return false;
-}
 
 
 
@@ -179,6 +181,11 @@ void save()
 }
 
 
+void start()
+{
+	load();
+}
+
 void removeplayer(int index)
 {
 	Player* tempPlayers = new Player[playeramount - 1];
@@ -219,16 +226,13 @@ int main()
 		std::cout << "Player Database app" << endl;
 
 		std::cout << "please choose an option by typing the number" << endl;
-		//std::cout << "this program will save all progress when closed using the menu do not hit x on the program or you will lose all your progr";
+		std::cout << "this program will save all progress when closed using the menu do not hit x on the program or you will lose all your progr";
 
 		cout << "1. Add Player" << endl;
 		cout << "2. Remove player" << endl;
 		cout << "3. Edit Player" << endl;
-		cout << "4. load" << endl;
-		cout << "5. save" << endl;
-		cout << "6. quit" << endl;
-		cout << "7: output player info test" << endl;
-
+		cout << "4: show complete list of all players" << endl;
+		cout << "5: quit" << endl;
 		cin >> input;
 
 		switch (input)
@@ -307,16 +311,10 @@ int main()
 				system("pause");
 			}
 			break;
-		case 4:
-			load();
-			break;
 		case 5:
-			save();
-			break;
-		case 6:
 			running = false;
 			break;
-		case 7:
+		case 4:
 			if (playeramount == 0)
 			{
 				cout << "there are no players created" << endl;
@@ -343,7 +341,7 @@ int main()
 
 
 
-
+	save();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
