@@ -226,7 +226,7 @@ int main()
 		std::cout << "Player Database app" << endl;
 
 		std::cout << "please choose an option by typing the number" << endl;
-		std::cout << "this program will save all progress when closed using the menu do not hit x on the program or you will lose all your progr";
+		std::cout << "this program will save all progress when closed using the menu" << endl;
 
 		cout << "1. Add Player" << endl;
 		cout << "2. Remove player" << endl;

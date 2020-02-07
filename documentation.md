@@ -10,7 +10,7 @@
 
 	- **Name**: player profile database
 
-	- **Problem Statement**: 
+	- **Problem Statement**:  make a database that stores player names and scores and then sort them. and save load from a .dat file
 
 	- **Problem Specifications** :
 
@@ -18,61 +18,26 @@
 - you use the keyboard to pick options
 
 3.  Output Information(All information output to the user) 
--The program displays different information and textures based on 4 different possible states the can game can be in:
-    - **New Game**: Once the game is started the program outputs information prompting the character to customize the character they will be playing as.
-    - **Battle Ladder**: After the characters character is customized, the program simulates a battle between the player and a monster.
-    - **Shop**: After a battle, if the player chooses to do so, the program depicts a store that allows the player to buy items using in game currency to increase their characters attributes.
-    - **Continue**: If a player dies,or the game is over, the program asks the player whether or no they would like to continue playing the game or whether they7 want to quit.
-   
+
+
 4. User Interface Information(Here is where user interface information is explained ex: menu options or  a HUD )
-	-The program displays different information and options based on 4 different possible states the can game can be in:
-    - **New Game Menu**: Once the game is started the program displays options prompting the player to customize the character they will be playing as by clicking an option on the screen
-    - **Battle Ladder Menus**: After the characters character is customized, the program gives the player the options to either attack or defend against the current enemy. After a battle is won the characters options update to going to the shop or continuing to the next battle.
-    - **Shop Menus**: Options update to ask the player whether they want to view all buyable attack, defense, or upgrade items in game. Depending on the selection, the options are then updated to be either buying the items on the screen or going back to the previous menu. If an item is bought the options are buying another which takes the player to the starting menu of the shop, or to leave the shop.
-    - **Continue**: The characters options are to either play the game again or to leave. If play again is selected the battle the player is given the option to either go to the shop which takes them to the shop starting menu,or to restart the previous battle. If they choose not to continue or play again the program tell the player to press the escape key in order to exit the program.
+
+
 
 ## II. Design(This is where you document how your program works. The main game loop should be described here. Everything from the programs ending to its beginning should be documented here. You can use diagrams, gifs, or other images to help.)
 
 1. _System Architecture_(This is where you describe how your application flows. This should break down the main game loop and how the application works from start to end)
 
-| 
-|:-----------
-Battle Ladder Diagram
-| ![User Interface gif](https://i.imgur.com/IxF3B4S.jpg)
-| 
-Starts at the players turn. The player then has the option to attack or defend. Afterwards its the enemies trun to attack. After both have attacked, a check is made to see if either or did. If so the state changes.
-|
-|:------------
-Game Diagram
-|![User Interface gif](https://i.imgur.com/EreoNOQ.jpg)
-The game starts in the new game state. After the new game state it transfers to the battle state. If the player decides to go to the shop the game goes to the shop state. If they die the game goes to the continue state. I fthey can and want to continue the game goes back to the battle ladder or shop state, otherwaise it exits.
-
-|
-Shop Diagram
-|![User Interface gif](https://i.imgur.com/HCuHrJN.jpg)
-The shop begins in a welcome state to greet the player. Afterwards the player is given a list of options to choose from. If the player wants to buy an item it first checks if they have enough money. If not, it enters the broke state which either allows the to leave or go back to the main menu. If they can buy it it enters the sellstae and gives the player the option to either leave the shop or go back to the main menu which is in the wait state.
-|
 1. _User Interface_(This is where each UI element is explained. For example each menu option the player has should would be explained here.)
 
 
 The program displays buttons and testures for the player to intract with based on the state they are in the game.
 
-### Shop Interface
-
-|![User Interface gif](https://media.giphy.com/media/4NtPkWuzbu3LrLpt24/giphy.gif)
-
-### Battle Interface
-
-|![User Interface gif](https://media.giphy.com/media/1vZ6PefLQIFof0HhzZ/giphy.gif)
- 
-
-3. ### Object Information(All classes and their atrributes shsould be described here.)
-
-   **File**: Player profile database.cpp(File name or class name)
+   **File**: Player profile database.cpp
 
      Description: 
      
-    **Attributes(This is a list of each variable,function, and property inside the class**
+    **Attributes
 
          Name: players
              Description: holds all of the players in the database
@@ -126,11 +91,13 @@ The program displays buttons and testures for the player to intract with based o
              Desceription:
              allows users to search for a player also used to prevent 2 players from having the same name
              Type: function
+             arguments: char name[30]
             
          Name: addplayer
              Desceription:
             adds a player to the dynamic array
              Type: function
+             arguments: char name[30], int score
 
          Name: load
             loads the database file
@@ -150,6 +117,7 @@ The program displays buttons and testures for the player to intract with based o
              Desceription:
              allows users to search for a player also used to prevent 2 players from having the same name
              Type: function
+             arguments: int index
 
     **File**: player.h
 
@@ -165,7 +133,8 @@ The program displays buttons and testures for the player to intract with based o
         Name: setname
              Description: 
              allows you to set the name for a specific player
-             Type: function
+             Type: function'
+             agruments: char newname[30]
 
          Name: getname
              Desceription:
@@ -176,6 +145,7 @@ The program displays buttons and testures for the player to intract with based o
              Desceription:
              allows you to set the score for a specific player
              Type: function
+             arguments int score
 
          Name: getscore
              Desceription:
