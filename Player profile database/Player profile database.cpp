@@ -217,7 +217,7 @@ int main()
 
 
 	std::cout << "Player Database app" << endl;
-
+	load();
 	while (running)
 	{
 		cin.clear();
