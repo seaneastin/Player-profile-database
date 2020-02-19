@@ -141,7 +141,7 @@ void addplayer(char name[30], int score)
 
 
 
-	sort();
+
 
 }
 
@@ -158,7 +158,6 @@ void load()
 			addplayer(tempname, tempscore);
 		}
 	}
-
 
 }
 
@@ -246,6 +245,7 @@ int main()
 				cout << "type the players score" << endl;
 				cin >> tempscore;
 				addplayer(tempname, tempscore);
+				sort();
 				cout << "success. added a new player" << endl;
 			}
 			else
